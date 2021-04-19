@@ -17,3 +17,4 @@ Before running the project, do the following things:
 * Test cases for API Automation are present in anovatestAPI_spec.js. 
 * Test cases for UI Automation are present in anovatestUI_spec.js. 
 * Also install the xpath plugin for cypress, because there are few xpaths used in these automation scripts. 
+* You can check the results of every test case from the screenshots present inside Results folder.
