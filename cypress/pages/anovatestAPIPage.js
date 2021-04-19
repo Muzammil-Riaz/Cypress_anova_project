@@ -62,7 +62,8 @@ class anovatestAPIPage
           const username  = config["username"];
           const password  = config["password"];
           const endpoint1 = config["apiendpoint1"];
-          const endpoint3 = config["apiendpoint3"]; 
+          const endpoint3 = config["apiendpoint3"];
+          const prod_spec = config["prod_spec"];
       
                   cy.request({ 
                     method:'POST',
@@ -76,7 +77,7 @@ class anovatestAPIPage
                         { 
                           method:'POST',
                           url: endpoint3, 
-                          body:{name: 'Test muz', description: 'Test Product', productGroup: 'Test', specificGravity: '1', displayUnits: '[data-value="60"]'}
+                          body:{prod_spec}
                         })
                     .then((response) => 
                       {
