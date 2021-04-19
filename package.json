@@ -1,0 +1,16 @@
+{
+  "name": "cypress-anova",
+  "version": "1.0.0",
+  "description": "Anova test project",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Muzammil Riaz",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^7.1.0",
+    "cypress-xpath": "^1.6.2"
+  }
+}
