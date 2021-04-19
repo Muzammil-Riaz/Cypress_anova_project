@@ -2,65 +2,90 @@ class anovatestAPIPage
 {
     check_login_status()
     {
+      cy.fixture("config.json").then(config => 
+        {
+          const username  = config["username"];
+          const password  = config["password"];
+          const endpoint1 = config["apiendpoint1"];
+      
          cy.request({
             method:'POST',
-            url:'/AuthenticateAndRetrieveApplicationInfo', 
-            body:{userName: 'muz@testautomation', password: '10Pearls!'}
+            url: endpoint1, 
+            body:{userName: username, password: password}
           })
            .then((response) => 
             {
                 expect(response).to.have.property('status',200)
             })
+        })     
     }  
 
     get_a_list_of_available_products()
     {
-      cy.request(
+      cy.fixture("config.json").then(config => 
         {
-        method:'POST',
-        url:'/AuthenticateAndRetrieveApplicationInfo', 
-        body:{userName: 'muz@testautomation', password: '10Pearls!'}
-        })
-        .then((response) => 
-         {
-          expect(response).to.have.property('status',200)  
-          cy.request
-          (
-            {
-              method:'POST',
-              url:'/RetrieveProductRecordsByDomain',
-              body:{domainId:'cc398962-1136-eb11-86c4-00155d55772b'},
-            }) 
-              .then((response) => 
-              {
-                expect(response).to.have.property('status',200)
-                expect(response.body).to.not.to.be.null  
-              })       
-         })
+          const username  = config["username"];
+          const password  = config["password"];
+          const domainId  = config["domainId"];
+          const endpoint1 = config["apiendpoint1"];
+          const endpoint2 = config["apiendpoint2"];
+       
+              cy.request(
+                {
+                method:'POST',
+                url: endpoint1, 
+                body:{userName: username, password: password}
+                })
+                .then((response) => 
+                {
+                  expect(response).to.have.property('status',200)  
+                  cy.request
+                  (
+                    {
+                      method:'POST',
+                      url: endpoint2,
+                      body:{domainId:domainId},
+                    }) 
+                      .then((response) => 
+                      {
+                        expect(response).to.have.property('status',200)
+                        expect(response.body).to.not.to.be.null  
+                      })       
+                })
+        })      
     }
     
     add_new_product()
     {  
-      cy.request({ 
-        method:'POST',
-        url:'/AuthenticateAndRetrieveApplicationInfo', 
-        body:{userName: 'muz@testautomation', password: '10Pearls!'}
-      })
-       .then((response) => 
+       cy.fixture("config.json").then(config => 
         {
-          expect(response).to.have.property('status',200)
-          cy.request(
-            { 
-              method:'POST',
-              url:'/RetrieveProductEditComponents', 
-              body:{name: 'Test muz', description: 'Test Product', productGroup: 'Test', specificGravity: '1', displayUnits: '[data-value="60"]'}
-            })
-         .then((response) => 
-          {
-           expect(response).to.have.property('status',200)
-          })
-        })
-    }    
+          const username  = config["username"];
+          const password  = config["password"];
+          const endpoint1 = config["apiendpoint1"];
+          const endpoint3 = config["apiendpoint3"]; 
+      
+                  cy.request({ 
+                    method:'POST',
+                    url: endpoint1, 
+                    body:{userName: username , password: password}
+                  })
+                  .then((response) => 
+                    {
+                      expect(response).to.have.property('status',200)
+                      cy.request(
+                        { 
+                          method:'POST',
+                          url: endpoint3, 
+                          body:{name: 'Test muz', description: 'Test Product', productGroup: 'Test', specificGravity: '1', displayUnits: '[data-value="60"]'}
+                        })
+                    .then((response) => 
+                      {
+                      expect(response).to.have.property('status',200)
+                      })
+                    })
+        })              
+    }
+                  
 }
 
      export default anovatestAPIPage

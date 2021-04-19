@@ -1,0 +1,9 @@
+{
+    "username"          : "muz@testautomation",
+    "password"          : "10Pearls!",
+    "url1"              : "https://test.transcend.anova.com/",
+    "apiendpoint1"      : "/AuthenticateAndRetrieveApplicationInfo",
+    "apiendpoint2"      : "/RetrieveProductRecordsByDomain",
+    "apiendpoint3"      : "RetrieveProductEditComponents",
+    "domainId"          : "cc398962-1136-eb11-86c4-00155d55772b"
+}
