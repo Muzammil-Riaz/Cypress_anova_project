@@ -30,8 +30,7 @@ class anovatestAPIPage
           const endpoint1 = config["apiendpoint1"];
           const endpoint2 = config["apiendpoint2"];
        
-              cy.request(
-                {
+              cy.request({
                 method:'POST',
                 url: endpoint1, 
                 body:{userName: username, password: password}
@@ -73,8 +72,7 @@ class anovatestAPIPage
                   .then((response) => 
                     {
                       expect(response).to.have.property('status',200)
-                      cy.request(
-                        { 
+                      cy.request({ 
                           method:'POST',
                           url: endpoint3, 
                           body:{prod_spec}
