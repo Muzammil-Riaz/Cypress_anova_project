@@ -44,7 +44,7 @@ class anovatestAPIPage
                     {
                       method:'POST',
                       url: endpoint2,
-                      body:{domainId:domainId},
+                      body:{domainId:domainId}
                     }) 
                       .then((response) => 
                       {

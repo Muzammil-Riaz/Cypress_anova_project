@@ -83,6 +83,8 @@ class anovatestUIPage {
             const username  = config["username"];
             const password  = config["password"];
             const endpoint1 = config["apiendpoint1"];
+            const endpoint2 = config["apiendpoint2"];
+            const domainId  = config["domainId"];
 
               cy.request(
                 { 
@@ -141,9 +143,17 @@ class anovatestUIPage {
                       .eq(2)
                       .click();
 
-                    cy.wait(5000); //waiting for the new page to load
+                    cy.intercept
+                    ({
+                      method: "POST",
+                      url: endpoint2,
+                      body:{domainId:domainId}
+                    })
+                      .as("pageload");
+                    cy.wait("@pageload");
 
-                    cy.get(this.products_table_selector)  //verifying that the product is added or not.
+                    cy.get(this.products_table_selector)   //verifying that the product is added or not.
+                      .should("be.visible")               
                       .find(".MuiTableCell-root.MuiTableCell-body")
                       .contains("test Muz");
                   }) 
