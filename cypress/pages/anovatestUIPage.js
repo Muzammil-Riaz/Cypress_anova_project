@@ -83,13 +83,12 @@ class anovatestUIPage {
             const username  = config["username"];
             const password  = config["password"];
             const endpoint1 = config["apiendpoint1"];
-            const endpoint3 = config["apiendpoint3"]; 
 
               cy.request(
                 { 
                 method:'POST',
-                url:'/AuthenticateAndRetrieveApplicationInfo', 
-                body:{userName: 'muz@testautomation', password: '10Pearls!'}
+                url: endpoint1, 
+                body:{userName: username, password: password}
                 })
               .then((response) => 
                 {
