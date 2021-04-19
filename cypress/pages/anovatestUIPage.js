@@ -1,8 +1,6 @@
 //array used to compare the products 
 var prods = ["R125", "Test2", "TestRamsha","Test","Hydrogen","Liquid","Methane Gas","Argon","CO2 LIN Mix","CO2","Helium","Nitrogen"];
-
 class anovatestUIPage {
-
       //LOCATORS
       login_username_id                 = "#username-input";
       login_next_button_xpath           = "//span[contains(text(),'Next')]";
@@ -17,16 +15,12 @@ class anovatestUIPage {
       create_product_group_id           = "#productGroup-input";
       create_specific_gravity_id        = "#specificGravity-input";
      
-      save_and_close_button_selector       = ".MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-true";
+      save_and_close_button_selector    = ".MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-true";
 
 
     login_with_correct_credentials()
     {
- 
          cy.visit("https://test.transcend.anova.com/"); //website 
-
-      //   cy.wait(6000); //added wait because of internet speed issue in my area due to bad weather, you can remove
-                        // it, as it won't break any flow
  
          cy.get(this.login_username_id) //username
            .should("be.visible")
@@ -36,8 +30,7 @@ class anovatestUIPage {
          cy.xpath(this.login_next_button_xpath) //clicking on the next button
            .should("be.visible")
            .click();
-           
-           
+            
          cy.get(this.login_password_id) //password
            .should("be.visible")
            .click()
@@ -47,18 +40,14 @@ class anovatestUIPage {
            .should("be.visible")
            .click();  
  
-        //   cy.wait(15000); //reason to add wait is slow internet issue. you can remove it, it won't
-                           //break any flow
- 
-         cy.get('body').then(body => {   //checking whether the modal is opening after successfull 
-                                         //login
+         cy.get('body').then(body => 
+          {   //checking whether the modal is opening after successfull login
              if (body.find('.MuiDialog-container > .MuiPaper-root').length > 0)
              {
                  cy.get('.MuiIconButton-label > .MuiSvgIcon-root') //closing that modal
                    .click();
              }
- 
-         })  
+          })  
     }
 
     Get_a_list_of_available_products()
@@ -70,7 +59,8 @@ class anovatestUIPage {
             .find(".MuiTableCell-root.MuiTableCell-body")
             .eq(0)
             .contains(prods[i-1])      //assertion to check the products 
-            .then(($div) => {
+            .then(($div) => 
+            {
               const text = $div.text()
               cy.log(text);            //display every product
             })
@@ -78,17 +68,16 @@ class anovatestUIPage {
 
     }  
 
-
       Add_new_product()
       {
-
-        cy.request({ 
+        cy.request(
+          { 
           method:'POST',
           url:'/AuthenticateAndRetrieveApplicationInfo', 
           body:{userName: 'muz@testautomation', password: '10Pearls!'}
-        })
+          })
          .then((response) => 
-          {
+           {
               expect(response).to.have.property('status',200)  
 
               cy.xpath(this.products_add_product_xpath) //adding new product
@@ -110,44 +99,41 @@ class anovatestUIPage {
 
                 }) 
 
-                cy.get(this.create_product_name_id)  //filling the fields (product name)
-                  .should("be.visible")
-                  .type("test Muz 2");
+              cy.get(this.create_product_name_id)  //filling the fields (product name)
+                .should("be.visible")
+                .type("test Muz 2");
 
-                cy.get(this.create_product_description_id) //description
-                  .should("be.visible")
-                  .type("product test"); 
+              cy.get(this.create_product_description_id) //description
+                .should("be.visible")
+                .type("product test"); 
 
-                cy.get(this.create_product_group_id) //product group
-                  .should("be.visible")
-                  .type("Test"); 
+              cy.get(this.create_product_group_id) //product group
+                .should("be.visible")
+                .type("Test"); 
 
-                cy.get(this.create_specific_gravity_id) //specific gravity
-                  .should("be.visible")
-                  .type("1");  
+              cy.get(this.create_specific_gravity_id) //specific gravity
+                .should("be.visible")
+                .type("1");  
 
-                cy.xpath("//span[contains(text(),'Select')]")
-                  .click();
+              cy.xpath("//span[contains(text(),'Select')]")
+                .click();
 
-                cy.get('#menu-displayUnit > .MuiPaper-root > .MuiList-root') //display units
-                  .find('[data-value="60"]')
-                  .should("be.visible")
-                  .click();
+              cy.get('#menu-displayUnit > .MuiPaper-root > .MuiList-root') //display units
+                .find('[data-value="60"]')
+                .should("be.visible")
+                .click();
 
-                cy.xpath(this.save_and_close_button_selector)
-                  .eq(2)
-                  .click();
+              cy.xpath(this.save_and_close_button_selector)
+                .eq(2)
+                .click();
 
-                cy.wait(5000); //waiting for the new page to load
+              cy.wait(5000); //waiting for the new page to load
 
-                cy.get(this.products_table_selector)  //verifying that the product is added or not.
+              cy.get(this.products_table_selector)  //verifying that the product is added or not.
                 .find(".MuiTableCell-root.MuiTableCell-body")
                 .contains("test Muz");
-
-      })
-          
+            })    
       }
-
     }
    
      export default anovatestUIPage
