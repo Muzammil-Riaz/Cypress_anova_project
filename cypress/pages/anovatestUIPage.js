@@ -50,7 +50,7 @@ class anovatestUIPage {
           })  
     }
 
-    Get_a_list_of_available_products()
+    get_a_list_of_available_products()
     {
       for(var i = 1; i < 13 ;i++)
       {
@@ -68,7 +68,7 @@ class anovatestUIPage {
 
     }  
 
-      Add_new_product()
+      add_new_product()
       {
         cy.request(
           { 

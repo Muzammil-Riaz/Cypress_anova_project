@@ -13,10 +13,10 @@ describe('Automation Test Suite ', function()
     })
 
     it('Get a list of available products', function() {
-        objAnova.Get_a_list_of_available_products();
+        objAnova.get_a_list_of_available_products();
     })
 
      it('Add a new product', function() {
-        objAnova.Add_new_product();
+        objAnova.add_new_product();
     })
 })

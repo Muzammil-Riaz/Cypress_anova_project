@@ -13,7 +13,7 @@ class anovatestAPIPage
             })
     }  
 
-    Get_a_list_of_available_products()
+    get_a_list_of_available_products()
     {
       cy.request(
         {
@@ -39,7 +39,7 @@ class anovatestAPIPage
          })
     }
     
-    Add_new_product()
+    add_new_product()
     {  
       cy.request({ 
         method:'POST',
